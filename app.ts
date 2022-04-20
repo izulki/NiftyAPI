@@ -7,7 +7,7 @@ import {config} from "@onflow/config"
 const app = express();
 app.use(cors())
 app.use('/api', routes);
-app.listen(3000, function () {
+app.listen(3080, function () {
     config().put("accessNode.api", "https://access-mainnet-beta.onflow.org")
-    console.log('Example app listening on port 3000!');
+    console.log('NiftyAPI listening on port 3080!');
 });
