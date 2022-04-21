@@ -140,13 +140,14 @@ export default function ownedMoments(req, res) {
 			final = await [...final, ...data]
 			search(currentCursor)
         } else {
-            
+            //console.log(final)
 
-            const cs = new pgp.helpers.ColumnSet(['ids', 'sn'], {table: 'temp_query_meta'});
+            const cs = new pgp.helpers.ColumnSet(['ids', 'sn', 'flowmomentid'], {table: 'temp_query_meta'});
             let tmpq = await final.map(x => {
                 return {
                     ids: x.setPlay.ID,
-                    sn: x.flowSerialNumber
+                    sn: x.flowSerialNumber,
+					flowmomentid: x.flowId
                 }
             })
             const massInsertEditionMeta = pgp.helpers.insert(tmpq, cs)
@@ -154,7 +155,8 @@ export default function ownedMoments(req, res) {
             let queryText = `
                 CREATE TEMP TABLE temp_query_meta(
                     ids Text,
-                    sn Text
+                    sn Text,
+					flowmomentid Text
                 );
                 ${massInsertEditionMeta};
                 SELECT * FROM temp_query_meta tmp
