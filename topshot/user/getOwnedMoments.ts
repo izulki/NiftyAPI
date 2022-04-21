@@ -159,7 +159,8 @@ export default function ownedMoments(req, res) {
                 ${massInsertEditionMeta};
                 SELECT * FROM temp_query_meta tmp
                 LEFT JOIN "TSEditionMeta" em ON em.id = tmp.ids
-                LEFT JOIN "TSEditions" e on e.id = tmp.ids;
+                LEFT JOIN "TSEditions" e on e.id = tmp.ids
+				LEFT JOIN "TSSets" s on s.id = em.setid;
                 DROP TABLE temp_query_meta;
             `
 
