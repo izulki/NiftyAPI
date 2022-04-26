@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 export default async function flowID(req, res) {
-  console.log(req.params)
+  //console.log(req.params)
   let username = req.params.username
   var data = JSON.stringify({
     query: `query GetUserProfileByUsername($input: getUserProfileByUsernameInput!) {
